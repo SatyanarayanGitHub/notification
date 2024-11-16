@@ -7,12 +7,12 @@ WORKDIR /app
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 RUN chmod +x ./mvnw
-RUN ./mvnw dependency:go-offline
 RUN ./mvnw dependency:resolve
-RUN ./mvnw -B -DskipTests clean package
+
 
 COPY src ./src
-
+RUN ./mvnw -B -DskipTests clean package
+RUN ls -l /app/target/
 
 CMD ["./mvnw", "spring-boot:run"]
 
@@ -21,7 +21,7 @@ CMD ["./mvnw", "spring-boot:run"]
 
 
 
-#RUN ls -l /app/target/
+
 
 # Copy the build file (JAR) into the container
 #COPY /app/target/notification-0.0.1-SNAPSHOT.jar app.jar
