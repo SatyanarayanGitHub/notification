@@ -14,10 +14,12 @@ RUN ./mvnw dependency:resolve
 COPY src ./src
 
 # Package the Spring Boot application
-RUN ./mvnw package -DskipTests
+RUN chmod +x ./mvnw && ./mvnw -B -DskipTests clean package
+
+RUN ls -l /app/target/
 
 # Copy the build file (JAR) into the container
-COPY target/notification-0.0.1-SNAPSHOT.jar app.jar
+COPY /app/target/*.jar app.jar
 
 # Expose the port your application runs on
 EXPOSE 8080
