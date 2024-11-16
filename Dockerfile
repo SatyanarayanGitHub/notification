@@ -8,13 +8,15 @@ WORKDIR /app
 COPY pom.xml ./
 COPY mvnw ./
 COPY .mvn .mvn
-RUN ./mvnw dependency:resolve
+
 
 # Copy the application source code into the container
 COPY src ./src
 
 # Package the Spring Boot application
-RUN chmod +x ./mvnw && ./mvnw -B -DskipTests clean package
+RUN chmod +x ./mvnw
+RUN ./mvnw dependency:resolve
+RUN ./mvnw -B -DskipTests clean package
 
 RUN ls -l /app/target/
 
