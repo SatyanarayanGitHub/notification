@@ -21,7 +21,7 @@ RUN ./mvnw -B -DskipTests clean package
 RUN ls -l /app/target/
 
 # Copy the build file (JAR) into the container
-COPY /app/target/*.jar app.jar
+COPY /app/target/notification-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose the port your application runs on
 EXPOSE 8080
